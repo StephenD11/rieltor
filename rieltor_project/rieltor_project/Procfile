@@ -1,1 +1,0 @@
-web: gunicorn rieltor_project.wsgi:application
