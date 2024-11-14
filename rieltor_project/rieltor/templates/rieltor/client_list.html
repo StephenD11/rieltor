@@ -1,0 +1,8 @@
+<h2>Список клиентов</h2>
+<ul>
+    {% for client in clients %}
+        <li>{{ client.name }} {{ client.surname }}</li>
+    {% empty %}
+        <li>Нет клиентов.</li>
+    {% endfor %}
+</ul>

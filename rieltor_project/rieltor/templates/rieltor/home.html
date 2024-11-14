@@ -1,0 +1,40 @@
+{% extends 'rieltor/base.html' %}
+
+{% block title %}Главная страница - Риелтор{% endblock %}
+{% block description %}Услуги риелтора, покупка и продажа недвижимости{% endblock %}
+{% block keywords %}главная, риелтор, недвижимость, керчь, симферополь, купить квартиру{% endblock %}
+
+{% block content  %}
+
+<h2 class="review-section">Услуги риелтора</h2>
+<p class="review-section">Здесь будет описание того, чем занимается риелтор. Например, помощь в покупке, продаже и аренде недвижимости.</p>
+
+<section class="review-section">
+    <h2>Отзывы клиентов</h2>
+    {% for review in page_obj %}
+    <div class="review">
+        <p>Имя: <small>{{ review.name }}</small> Комментарий: <small>{{ review.comment }}</small> Дата: <small>{{ review.created_at }}</small></p>
+    </div>
+    {% empty %}
+    <p>Пока нет отзывов.</p>
+    {% endfor %}
+
+    <!-- Пагинация -->
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; Первая</a>
+            <a href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+        {% endif %}
+
+        <span>Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Следующая</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Последняя &raquo;</a>
+        {% endif %}
+    </div>
+
+    <a class="pagination" href="{% url 'add_review' %}">Оставить отзыв</a>
+</section>
+
+{% endblock %}

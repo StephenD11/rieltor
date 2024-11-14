@@ -1,0 +1,52 @@
+{% extends 'rieltor/base.html' %}
+{% load humanize %}
+
+{% block title %}Недвижимость{% endblock %}
+
+{% block content  %}
+
+<div class="property-list">
+    {% for property in properties %}
+    <div class="property-card">
+        <a href="{% url 'property_detail' property.pk %}">
+            {% if property.image %}
+            <img src="{{ property.image.url }}" alt="{{ property.adress }}">
+            {% endif %}
+            <h3>{{ property.adress }}</h3>
+        </a>
+        <p>Цена: {{ property.price|intcomma  }}₽</p>
+        <p>Город: {{ property.city }}</p>
+        <p>Кол-во комнат: {{ property.rooms }}</p>
+        <p>Тип комнат: {{ property.type_of_rooms }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="property-list">
+    <form method="get">
+    {{ form.as_p }}
+    <button type="submit">Поиск</button>
+</form>
+</div>
+
+
+<!-- Пагинация -->
+<div class="pagination">
+    <span class="step-links">
+        {% if properties.has_previous %}
+            <a href="?page=1">&laquo; Первая</a>
+            <a href="?page={{ properties.previous_page_number }}">Предыдущая</a>
+        {% endif %}
+
+        <span class="current">
+            Страница {{ properties.number }} из {{ properties.paginator.num_pages }}.
+        </span>
+
+        {% if properties.has_next %}
+            <a href="?page={{ properties.next_page_number }}">Следующая</a>
+            <a href="?page={{ properties.paginator.num_pages }}">Последняя &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock %}

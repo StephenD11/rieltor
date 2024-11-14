@@ -1,0 +1,23 @@
+{% extends 'rieltor/base.html' %}
+
+{% block title %}Вопросы{% endblock %}
+
+{% block content %}
+    <h2 class="review-section">Нажмите на интересующий вас вопрос</h2>
+
+    <div class="review-section">
+        {% for faq in faqs %}
+            <div class="faq-item">
+                <p class="question" onclick="toggleAnswer({{ faq.id }})">{{ faq.question }}</p>
+                <div id="answer-{{ faq.id }}" class="answer" style="display: none;">{{ faq.answer }}</div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        function toggleAnswer(id) {
+            const answer = document.getElementById('answer-' + id);
+            answer.style.display = (answer.style.display === 'none') ? 'block' : 'none';
+        }
+    </script>
+{% endblock %}

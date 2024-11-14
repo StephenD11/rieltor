@@ -1,0 +1,20 @@
+{% extends 'rieltor/base.html' %}
+
+{% block title %}Добавить отзыв{% endblock %}
+
+{% block content  %}
+<div class="property-item">
+    <h1>Добавить отзыв</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Отправить</button>
+    </form>
+
+</div>
+<div class="property-item">
+    <a href="{% url 'home' %}">Вернуться в главное меню</a>
+</div>
+
+{% endblock %}

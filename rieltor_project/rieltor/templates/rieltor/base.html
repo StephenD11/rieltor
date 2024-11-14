@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>{% block title %}Сайт Риелтора{% endblock %}</title>
+    <meta name="description" content="{% block description %}Риелторские услуги{% endblock %}">
+    <meta name="keywords" content="{% block keywords %}недвижимость, риелтор, покупка квартир{% endblock %}">
+    <link rel="stylesheet" href="{% static 'rieltor/styles.css' %}">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3V2J7443WY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-3V2J7443WY');
+    </script>
+</head>
+<body>
+<header class="review-section">
+    <h1 class="gallery">Добро пожаловать на сайт риелтора!</h1>
+    <nav class="gallery">
+        <ul>
+            <li><a href="/">Главная</a></li>
+            <li><a href="/gallery/">Галерея недвижимости</a></li>
+            <li><a href="/contacts/">Контакты</a></li>
+            <li><a href="/faq/">Частые вопросы</a></li>
+            <li><a href="{% url 'admin:index' %}">Вход</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<footer style="display: flex; justify-content: center;">
+    <p>© 2024 Риелтор</p>
+</footer>
+</body>
+</html>
+
+

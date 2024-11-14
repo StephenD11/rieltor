@@ -1,0 +1,36 @@
+{% extends 'rieltor/base.html' %}
+{% load humanize %}
+
+
+{% block title %}Детальная информация{% endblock %}
+
+{% block content  %}
+<h1>{{ property.adress }}</h1> <!-- Адрес недвижимости -->
+<div>
+    {% if property.image %}
+    <img src="{{ property.image.url }}" alt="{{ property.adress }}" width="300">
+    {% endif %}
+</div>
+<p><strong>Цена:</strong> {{ property.price|intcomma }}₽</p>
+<p><strong>Город:</strong> {{ property.city }}</p>
+<p><strong>Этаж:</strong> {{ property.floor }}</p>
+<p><strong>Площадь:</strong> {{ property.square }} м²</p>
+<p><strong>Жилая площадь:</strong> {{ property.living_area }} м²</p>
+<p><strong>Тип комнат:</strong> {{ property.type_of_rooms }}</p>
+<p><strong>Ремонт:</strong> {{ property.repair }}</p>
+<p><strong>Санузел:</strong> {{ property.bathroom }}</p>
+<p><strong>Площадь кухни:</strong> {{ property.kitchen_area }} м²</p>
+<p><strong>Описание:</strong> {{ property.description }}</p>
+<p><strong>Карта:</strong></p>
+<div>{{ property.map_link|safe }}</div>
+
+
+<div>
+    <h3>Клиенты связанные с этим объектом:</h3>
+    {% for client in property.clients.all %}
+    <ul>
+        <li>{{ client.name }} {{ client.surname }}</li>
+    </ul>
+    {% endfor %}
+</div>
+{% endblock %}
