@@ -34,7 +34,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '::1']
 
@@ -87,12 +87,23 @@ WSGI_APPLICATION = 'rieltor_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'new_base_db',  # Имя базы данных, которую ты создал
+        'USER': 'admin_user',  # Логин, который ты создал для подключения
+        'PASSWORD': 'admin123',  # Пароль для этого пользователя
+        'HOST': 'localhost',  # Обычно это localhost
+        'PORT': '3306',  # Стандартный порт для MySQL
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -141,3 +152,4 @@ CSRF_COOKIE_SECURE = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_HSTS_SECONDS = 3600
 X_FRAME_OPTIONS = 'DENY'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
